@@ -1,3 +1,4 @@
+cat << EOF | oc apply -f -
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -24,4 +25,4 @@ spec:
   name: rhbk-operator 
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-
+EOF

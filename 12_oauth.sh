@@ -1,6 +1,6 @@
 oc get oauth cluster -o yaml > orig_oauth.yaml
 cat << EOF >> orig_oauth.yaml
- - type: OpenID
+  - type: OpenID
     name: oidcidp
     mappingMethod: add
     openID:

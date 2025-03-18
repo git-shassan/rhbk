@@ -1,3 +1,4 @@
+cat << EOF | oc apply -f - 
 apiVersion: v1
 data:
   # echo -n testpassword | base64
@@ -10,7 +11,5 @@ kind: Secret
 metadata:
   name: keycloak-db-secret
   namespace: keycloak
-  annotations:
-    argocd.argoproj.io/sync-wave: "-20"    
 type: Opaque
-
+EOF

@@ -1,10 +1,9 @@
+cat << EOF | oc apply -f - 
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgresql-db
   namespace: keycloak
-  annotations:
-    argocd.argoproj.io/sync-wave: "-40"    
 spec:
   serviceName: postgresql-db-service
   selector:
@@ -41,8 +40,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgres-db
-  annotations:
-    argocd.argoproj.io/sync-wave: "20"
+  namespace: keycloak
 spec:
   selector:
     app: postgresql-db
@@ -50,4 +48,4 @@ spec:
   ports:
   - port: 5432
     targetPort: 5432
-
+EOF

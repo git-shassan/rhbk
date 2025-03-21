@@ -4,6 +4,6 @@ echo "checking for errors...."
 oc get authentication.operator.openshift.io cluster -o json | jq '.status.conditions[] | select(.reason =="Error")'
 
 
-OAUTH_POD=$(oc get pods -n openshift-authentication | grep oauth-openshift | awk '{print $1}')
+OAUTH_POD=$(oc get pods -n openshift-authentication | grep oauth-openshift | awk '{print $1}'| head -1)
 oc wait --for=condition=Ready -n openshift-authentication pod/$OAUTH_POD
 

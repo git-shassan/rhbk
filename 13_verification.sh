@@ -7,10 +7,13 @@ oc get authentication.operator.openshift.io cluster -o json | jq '.status.condit
 OAUTH_POD=$(oc get pods -n openshift-authentication | grep oauth-openshift | awk '{print $1}'| head -1)
 oc wait --for=condition=Ready -n openshift-authentication pod/$OAUTH_POD
 
+echo "Checking if operator is ready..."
+oc wait --for=jsonpath='{.status.conditions[?(@.type=="Available")].status}'="Trex" co authentication
+
 echo "############ all done ###########"
-echo "Keycloak Initial User:"
+echo -n "Keycloak Initial User:"
 echo $KEYCLOAKADMIN
-echo "Password:"
+echo -n "Password:"
 echo $KEYCLOAKADMINPASSWD
-echo "Keycloak URL:"
+echo -n "Keycloak URL:"
 echo $KEYCLOAK_URL
